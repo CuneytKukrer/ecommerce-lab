@@ -1,0 +1,139 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Projects\\ecommerce-lab\\src\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{874E4DEB-3634-84B4-A85F-657994C57B98}|CartService\\CartService.csproj|c:\\projects\\ecommerce-lab\\src\\cartservice\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{874E4DEB-3634-84B4-A85F-657994C57B98}|CartService\\CartService.csproj|solutionrelative:cartservice\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{091578C1-6C28-3185-2839-F0C07C55C3F2}|InventoryService\\InventoryService.csproj|c:\\projects\\ecommerce-lab\\src\\inventoryservice\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{091578C1-6C28-3185-2839-F0C07C55C3F2}|InventoryService\\InventoryService.csproj|solutionrelative:inventoryservice\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{091578C1-6C28-3185-2839-F0C07C55C3F2}|InventoryService\\InventoryService.csproj|c:\\projects\\ecommerce-lab\\src\\inventoryservice\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{091578C1-6C28-3185-2839-F0C07C55C3F2}|InventoryService\\InventoryService.csproj|solutionrelative:inventoryservice\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{091578C1-6C28-3185-2839-F0C07C55C3F2}|InventoryService\\InventoryService.csproj|c:\\projects\\ecommerce-lab\\src\\inventoryservice\\endpoints\\inventoryendpoints.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{091578C1-6C28-3185-2839-F0C07C55C3F2}|InventoryService\\InventoryService.csproj|solutionrelative:inventoryservice\\endpoints\\inventoryendpoints.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{091578C1-6C28-3185-2839-F0C07C55C3F2}|InventoryService\\InventoryService.csproj|c:\\projects\\ecommerce-lab\\src\\inventoryservice\\services\\inventorymanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{091578C1-6C28-3185-2839-F0C07C55C3F2}|InventoryService\\InventoryService.csproj|solutionrelative:inventoryservice\\services\\inventorymanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{091578C1-6C28-3185-2839-F0C07C55C3F2}|InventoryService\\InventoryService.csproj|c:\\projects\\ecommerce-lab\\src\\inventoryservice\\data\\inventorydbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{091578C1-6C28-3185-2839-F0C07C55C3F2}|InventoryService\\InventoryService.csproj|solutionrelative:inventoryservice\\data\\inventorydbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{091578C1-6C28-3185-2839-F0C07C55C3F2}|InventoryService\\InventoryService.csproj|c:\\projects\\ecommerce-lab\\src\\inventoryservice\\models\\inventoryitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{091578C1-6C28-3185-2839-F0C07C55C3F2}|InventoryService\\InventoryService.csproj|solutionrelative:inventoryservice\\models\\inventoryitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "InventoryManager.cs",
+              "DocumentMoniker": "C:\\Projects\\ecommerce-lab\\src\\InventoryService\\Services\\InventoryManager.cs",
+              "RelativeDocumentMoniker": "InventoryService\\Services\\InventoryManager.cs",
+              "ToolTip": "C:\\Projects\\ecommerce-lab\\src\\InventoryService\\Services\\InventoryManager.cs",
+              "RelativeToolTip": "InventoryService\\Services\\InventoryManager.cs",
+              "ViewState": "AgIAAB0AAAAAAAAAAADwvzgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-05T14:27:51.77Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "InventoryDbContext.cs",
+              "DocumentMoniker": "C:\\Projects\\ecommerce-lab\\src\\InventoryService\\Data\\InventoryDbContext.cs",
+              "RelativeDocumentMoniker": "InventoryService\\Data\\InventoryDbContext.cs",
+              "ToolTip": "C:\\Projects\\ecommerce-lab\\src\\InventoryService\\Data\\InventoryDbContext.cs",
+              "RelativeToolTip": "InventoryService\\Data\\InventoryDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-05T14:27:02.166Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Projects\\ecommerce-lab\\src\\CartService\\Program.cs",
+              "RelativeDocumentMoniker": "CartService\\Program.cs",
+              "ToolTip": "C:\\Projects\\ecommerce-lab\\src\\CartService\\Program.cs",
+              "RelativeToolTip": "CartService\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-05T14:30:15.67Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "InventoryEndpoints.cs",
+              "DocumentMoniker": "C:\\Projects\\ecommerce-lab\\src\\InventoryService\\Endpoints\\InventoryEndpoints.cs",
+              "RelativeDocumentMoniker": "InventoryService\\Endpoints\\InventoryEndpoints.cs",
+              "ToolTip": "C:\\Projects\\ecommerce-lab\\src\\InventoryService\\Endpoints\\InventoryEndpoints.cs",
+              "RelativeToolTip": "InventoryService\\Endpoints\\InventoryEndpoints.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAADwvx4AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-05T14:28:20.081Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Projects\\ecommerce-lab\\src\\InventoryService\\Program.cs",
+              "RelativeDocumentMoniker": "InventoryService\\Program.cs",
+              "ToolTip": "C:\\Projects\\ecommerce-lab\\src\\InventoryService\\Program.cs",
+              "RelativeToolTip": "InventoryService\\Program.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAADwvxgAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-05T13:02:00.851Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "appsettings.Development.json",
+              "DocumentMoniker": "C:\\Projects\\ecommerce-lab\\src\\InventoryService\\appsettings.Development.json",
+              "RelativeDocumentMoniker": "InventoryService\\appsettings.Development.json",
+              "ToolTip": "C:\\Projects\\ecommerce-lab\\src\\InventoryService\\appsettings.Development.json",
+              "RelativeToolTip": "InventoryService\\appsettings.Development.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-10-05T14:29:32.501Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "InventoryItem.cs",
+              "DocumentMoniker": "C:\\Projects\\ecommerce-lab\\src\\InventoryService\\Models\\InventoryItem.cs",
+              "RelativeDocumentMoniker": "InventoryService\\Models\\InventoryItem.cs",
+              "ToolTip": "C:\\Projects\\ecommerce-lab\\src\\InventoryService\\Models\\InventoryItem.cs",
+              "RelativeToolTip": "InventoryService\\Models\\InventoryItem.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-05T13:08:27.807Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
