@@ -2,4 +2,5 @@
   <Project Path="CartService/CartService.csproj" />
   <Project Path="InventoryService/InventoryService.csproj" />
   <Project Path="OrderService/OrderService.csproj" />
+  <Project Path="PaymentService/PaymentService.csproj" />
 </Solution>
