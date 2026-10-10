@@ -9,17 +9,20 @@ public class OrderManager
     private readonly OrderDbContext _db;
     private readonly CartClient _cart;
     private readonly InventoryClient _inventory;
+    private readonly PaymentClient _payment;
     private readonly ILogger<OrderManager> _logger;
 
     public OrderManager(
         OrderDbContext db,
         CartClient cart,
         InventoryClient inventory,
+        PaymentClient payment,
         ILogger<OrderManager> logger)
     {
         _db = db;
         _cart = cart;
         _inventory = inventory;
+        _payment = payment;
         _logger = logger;
     }
 
@@ -47,10 +50,15 @@ public class OrderManager
             {
                 ProductId = i.ProductId,
                 Quantity = i.Quantity,
-                PriceAtPurchase = 0m // TODO: Product Service'ten al
+                PriceAtPurchase = 0m // TODO: Product Service
             }).ToList(),
             Status = OrderStatus.Pending
         };
+
+        _db.Orders.Add(order);
+        await _db.SaveChangesAsync();
+
+        _logger.LogInformation("Order {OrderId} created (PENDING)", order.Id);
 
         // 3. Stok rezervasyonu (compensation ile)
         var reserved = new List<(int productId, int quantity)>();
@@ -63,22 +71,46 @@ public class OrderManager
                 foreach (var (pid, qty) in reserved)
                     await _inventory.ReleaseAsync(pid, qty);
 
+                order.Status = OrderStatus.Cancelled;
+                order.UpdatedAt = DateTime.UtcNow;
+                await _db.SaveChangesAsync();
+
                 _logger.LogWarning(
-                    "Checkout failed for user {UserId}: insufficient stock for {ProductId}",
-                    userId, item.ProductId);
+                    "Checkout failed for order {OrderId}: insufficient stock for product {ProductId}",
+                    order.Id, item.ProductId);
 
                 return (null, $"Insufficient stock for product {item.ProductId}");
             }
             reserved.Add((item.ProductId, item.Quantity));
         }
 
-        // 4. Siparişi kaydet
-        _db.Orders.Add(order);
+        // 4. Ödeme isteği gönder (Idempotency-Key = orderId)
+        var totalAmount = 0m; // TODO: fiyat entegrasyonu
+        var paymentResult = await _payment.ChargeAsync(order.Id, totalAmount, order.Id.ToString());
+
+        if (!paymentResult.Success)
+        {
+            // Compensation: tüm rezervasyonları geri al
+            foreach (var (pid, qty) in reserved)
+                await _inventory.ReleaseAsync(pid, qty);
+
+            order.Status = OrderStatus.Failed;
+            order.UpdatedAt = DateTime.UtcNow;
+            await _db.SaveChangesAsync();
+
+            _logger.LogWarning(
+                "Payment failed for order {OrderId}: {Reason}",
+                order.Id, paymentResult.FailureReason);
+
+            return (order, paymentResult.FailureReason ?? "Payment failed");
+        }
+
+        // 5. Ödeme başarılı → CONFIRMED
+        order.Status = OrderStatus.Confirmed;
+        order.UpdatedAt = DateTime.UtcNow;
         await _db.SaveChangesAsync();
 
-        _logger.LogInformation(
-            "Order {OrderId} created for user {UserId} with {ItemCount} items",
-            order.Id, userId, order.Items.Count);
+        _logger.LogInformation("Order {OrderId} CONFIRMED", order.Id);
 
         return (order, null);
     }

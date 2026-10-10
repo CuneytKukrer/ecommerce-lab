@@ -1,4 +1,5 @@
-﻿using OrderService.Services;
+﻿using OrderService.Models;
+using OrderService.Services;
 
 namespace OrderService.Endpoints;
 
@@ -20,7 +21,12 @@ public static class OrderEndpoints
         group.MapPost("/checkout/{userId}", async (string userId, OrderManager mgr) =>
         {
             var (order, error) = await mgr.CheckoutAsync(userId);
-            if (order is null) return Results.BadRequest(new { error });
+            if (order is null)
+                return Results.BadRequest(new { error });
+
+            if (order.Status == OrderStatus.Failed)
+                return Results.Ok(new { order, error }); // 200 ama FAILED status ile
+
             return Results.Created($"/orders/{order.Id}", order);
         });
     }

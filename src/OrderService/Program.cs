@@ -15,6 +15,9 @@ builder.Services.AddHttpClient<CartClient>(c =>
 builder.Services.AddHttpClient<InventoryClient>(c =>
     c.BaseAddress = new Uri("http://localhost:5002")); // Inventory Service portu
 
+builder.Services.AddHttpClient<PaymentClient>(c =>
+    c.BaseAddress = new Uri("http://localhost:5004")); // Payment Service portu
+
 builder.Services.AddScoped<OrderManager>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddOpenApi();

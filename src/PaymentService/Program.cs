@@ -3,6 +3,7 @@ using PaymentService.Data;
 using PaymentService.Endpoints;
 using PaymentService.Services;
 using Scalar.AspNetCore;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +14,11 @@ builder.Services.AddSingleton<MockPaymentProvider>();
 builder.Services.AddScoped<PaymentManager>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddOpenApi();
+
+builder.Services.ConfigureHttpJsonOptions(options =>
+{
+    options.SerializerOptions.Converters.Add(new JsonStringEnumConverter());
+});
 
 var app = builder.Build();
 
