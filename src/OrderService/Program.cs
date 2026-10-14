@@ -19,6 +19,7 @@ builder.Services.AddHttpClient<PaymentClient>(c =>
     c.BaseAddress = new Uri("http://localhost:5004")); // Payment Service portu
 
 builder.Services.AddScoped<OrderManager>();
+builder.Services.AddHostedService<ReconciliationWorker>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddOpenApi();
 //builder.Services.AddSwaggerGen();

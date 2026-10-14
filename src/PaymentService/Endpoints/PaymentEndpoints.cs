@@ -19,6 +19,13 @@ public static class PaymentEndpoints
         group.MapGet("/order/{orderId:guid}", async (Guid orderId, PaymentManager mgr) =>
             Results.Ok(await mgr.GetByOrderAsync(orderId)));
 
+        group.MapGet("/order/{orderId:guid}/latest", async (Guid orderId, PaymentManager mgr) =>
+        {
+            var payments = await mgr.GetByOrderAsync(orderId);
+            var latest = payments.OrderByDescending(p => p.CreatedAt).FirstOrDefault();
+            return latest is null ? Results.NotFound() : Results.Ok(latest);
+        });
+
         group.MapPost("/", async (
             ProcessPaymentRequest req,
             HttpContext ctx,

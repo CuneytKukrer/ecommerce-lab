@@ -5,7 +5,8 @@ public enum OrderStatus
     Pending,
     Confirmed,
     Failed,
-    Cancelled
+    Cancelled,
+    ReconciliationRequired  // YENİ: Ödeme belirsiz
 }
 
 public class Order

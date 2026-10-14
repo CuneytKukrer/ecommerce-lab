@@ -88,7 +88,20 @@ public class OrderManager
         var totalAmount = 0m; // TODO: fiyat entegrasyonu
         var paymentResult = await _payment.ChargeAsync(order.Id, totalAmount, order.Id.ToString());
 
-        if (!paymentResult.Success)
+        if (paymentResult.Outcome == PaymentOutcome.Unknown)
+        {
+            order.Status = OrderStatus.ReconciliationRequired;
+            order.UpdatedAt = DateTime.UtcNow;
+            await _db.SaveChangesAsync();
+
+            _logger.LogWarning(
+                "Order {OrderId} requires reconciliation: payment outcome unknown",
+                order.Id);
+
+            return (order, "Payment outcome unknown — reconciliation required");
+        }
+
+        if (paymentResult.Outcome != PaymentOutcome.Success)
         {
             // Compensation: tüm rezervasyonları geri al
             foreach (var (pid, qty) in reserved)
