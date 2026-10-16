@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OrderService.Data;
+using OrderService.Messaging;
 using OrderService.Models;
 
 namespace OrderService.Services;
@@ -10,6 +11,7 @@ public class OrderManager
     private readonly CartClient _cart;
     private readonly InventoryClient _inventory;
     private readonly PaymentClient _payment;
+    private readonly OrderEventPublisher _publisher;
     private readonly ILogger<OrderManager> _logger;
 
     public OrderManager(
@@ -17,12 +19,14 @@ public class OrderManager
         CartClient cart,
         InventoryClient inventory,
         PaymentClient payment,
+        OrderEventPublisher publisher,
         ILogger<OrderManager> logger)
     {
         _db = db;
         _cart = cart;
         _inventory = inventory;
         _payment = payment;
+        _publisher = publisher;
         _logger = logger;
     }
 
@@ -79,6 +83,8 @@ public class OrderManager
                     "Checkout failed for order {OrderId}: insufficient stock for product {ProductId}",
                     order.Id, item.ProductId);
 
+                await _publisher.PublishOrderEventAsync(order.Id, order.UserId, "Cancelled", order.TotalAmount);
+                
                 return (null, $"Insufficient stock for product {item.ProductId}");
             }
             reserved.Add((item.ProductId, item.Quantity));
@@ -98,6 +104,8 @@ public class OrderManager
                 "Order {OrderId} requires reconciliation: payment outcome unknown",
                 order.Id);
 
+            await _publisher.PublishOrderEventAsync(order.Id, order.UserId, "ReconciliationRequired", order.TotalAmount);
+
             return (order, "Payment outcome unknown — reconciliation required");
         }
 
@@ -115,6 +123,8 @@ public class OrderManager
                 "Payment failed for order {OrderId}: {Reason}",
                 order.Id, paymentResult.FailureReason);
 
+            await _publisher.PublishOrderEventAsync(order.Id, order.UserId, "Failed", order.TotalAmount);
+
             return (order, paymentResult.FailureReason ?? "Payment failed");
         }
 
@@ -124,6 +134,8 @@ public class OrderManager
         await _db.SaveChangesAsync();
 
         _logger.LogInformation("Order {OrderId} CONFIRMED", order.Id);
+
+        await _publisher.PublishOrderEventAsync(order.Id, order.UserId, "Confirmed", order.TotalAmount);
 
         return (order, null);
     }

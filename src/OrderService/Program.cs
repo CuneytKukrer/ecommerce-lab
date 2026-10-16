@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using OrderService.Data;
 using OrderService.Endpoints;
+using OrderService.Messaging;
 using OrderService.Services;
 using Scalar.AspNetCore;
 
@@ -20,6 +21,12 @@ builder.Services.AddHttpClient<PaymentClient>(c =>
 
 builder.Services.AddScoped<OrderManager>();
 builder.Services.AddHostedService<ReconciliationWorker>();
+builder.Services.AddSingleton<OrderEventPublisher>(sp =>
+{
+    var config = sp.GetRequiredService<IConfiguration>();
+    var logger = sp.GetRequiredService<ILogger<OrderEventPublisher>>();
+    return OrderEventPublisher.CreateAsync(config, logger).GetAwaiter().GetResult();
+});
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddOpenApi();
 //builder.Services.AddSwaggerGen();
