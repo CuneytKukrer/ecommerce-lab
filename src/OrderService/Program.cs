@@ -1,4 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using OpenTelemetry.Resources;
+using OpenTelemetry.Trace;
 using OrderService.Data;
 using OrderService.Endpoints;
 using OrderService.Messaging;
@@ -27,6 +29,14 @@ builder.Services.AddSingleton<OrderEventPublisher>(sp =>
     var logger = sp.GetRequiredService<ILogger<OrderEventPublisher>>();
     return OrderEventPublisher.CreateAsync(config, logger).GetAwaiter().GetResult();
 });
+
+builder.Services.AddOpenTelemetry()
+    .ConfigureResource(r => r.AddService("OrderService"))
+    .WithTracing(t => t
+        .AddAspNetCoreInstrumentation()
+        .AddHttpClientInstrumentation()
+        .AddOtlpExporter(o => o.Endpoint = new Uri("http://localhost:4317")));
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddOpenApi();
 //builder.Services.AddSwaggerGen();

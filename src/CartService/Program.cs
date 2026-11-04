@@ -1,5 +1,7 @@
 using CartService.Endpoints;
 using CartService.Services;
+using OpenTelemetry.Resources;
+using OpenTelemetry.Trace;
 using Scalar.AspNetCore;
 using StackExchange.Redis;
 using System.Text.Json.Serialization;
@@ -23,6 +25,13 @@ builder.Services.ConfigureHttpJsonOptions(options =>
 {
     options.SerializerOptions.Converters.Add(new JsonStringEnumConverter());
 });
+
+builder.Services.AddOpenTelemetry()
+    .ConfigureResource(r => r.AddService("CartService"))
+    .WithTracing(t => t
+        .AddAspNetCoreInstrumentation()
+        .AddHttpClientInstrumentation()
+        .AddOtlpExporter(o => o.Endpoint = new Uri("http://localhost:4317")));
 
 var app = builder.Build();
 

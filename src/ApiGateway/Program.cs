@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.RateLimiting;
+using OpenTelemetry.Resources;
+using OpenTelemetry.Trace;
 using System.Threading.RateLimiting;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,6 +26,12 @@ builder.Services.AddRateLimiter(options =>
     options.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
 });
 
+builder.Services.AddOpenTelemetry()
+    .ConfigureResource(r => r.AddService("ApiGateway"))
+    .WithTracing(t => t
+        .AddAspNetCoreInstrumentation()
+        .AddHttpClientInstrumentation()
+        .AddOtlpExporter(o => o.Endpoint = new Uri("http://localhost:4317")));
 var app = builder.Build();
 
 app.UseRateLimiter();

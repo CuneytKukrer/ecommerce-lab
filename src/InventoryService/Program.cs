@@ -2,6 +2,8 @@ using InventoryService.Data;
 using InventoryService.Endpoints;
 using InventoryService.Services;
 using Microsoft.EntityFrameworkCore;
+using OpenTelemetry.Resources;
+using OpenTelemetry.Trace;
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +14,13 @@ builder.Services.AddDbContext<InventoryDbContext>(opt =>
 builder.Services.AddScoped<InventoryManager>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddOpenApi();
+
+builder.Services.AddOpenTelemetry()
+    .ConfigureResource(r => r.AddService("InventoryService"))
+    .WithTracing(t => t
+        .AddAspNetCoreInstrumentation()
+        .AddHttpClientInstrumentation()
+        .AddOtlpExporter(o => o.Endpoint = new Uri("http://localhost:4317")));
 
 var app = builder.Build();
 
