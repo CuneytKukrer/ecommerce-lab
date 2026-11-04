@@ -19,7 +19,7 @@ Client → API Gateway (YARP, rate limiting)
 All services export traces via OpenTelemetry → Jaeger.  
 
 
-![Jaeger trace](docs/images/jaeger-trace.png)  
+![Jaeger trace](src/docs/images/jaeger-trace.png)  
 *Full distributed trace: Gateway → Order → Cart, Inventory, Payment*
 
 ## Services
